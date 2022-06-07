@@ -21,20 +21,20 @@
                 <option value="Snowy">Snowy</option>
             </select>
             <section id="temp-info">
-                <h2 id="temp"></h2>
+                <h2 id="temp">75°</h2>
                 <div id="temp-buttons">
                     <button id="temp-up">🥵 Up</button>
                     <button id="temp-down">🥶 Down</button>
                 </div>
-                <button>Get Current Temp</button>
+                <button id="get-temp">Get Current Temp</button>
             </section>
             <section id="city-info">
                 <input type="text" name="city" id="city" placeholder="change city">
                 <button id="reset-city-button">Reset</button>
             </section>
-            <img src="assets/hot.jpg" alt="image depicting current temperature." width="500">
+            <img id="landscape" src="assets/warm.jpg" alt="image depicting current temperature." width="500">
         </main>
-        <script href="./src/index.js"></script>
+        <script src="src/index.js"></script>
         <script src="./node_modules/axios/dist/axios.min.js"></script>
     </body>
 </html>
