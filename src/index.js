@@ -1,5 +1,16 @@
 const state = {
+  city: 'Atlanta 🍑',
   temp: 75,
+};
+
+const raiseTemp = () => {
+  state.temp += 1;
+  updateTemp();
+};
+
+const lowerTemp = () => {
+  state.temp -= 1;
+  updateTemp();
 };
 
 const updateTemp = () => {
@@ -24,21 +35,22 @@ const updateTemp = () => {
   }
 };
 
-const raiseTemp = () => {
-  state.temp += 1;
-  updateTemp();
-};
-
-const lowerTemp = () => {
-  state.temp -= 1;
-  updateTemp();
+const updateCity = () => {
+  const city = document.getElementById('city');
+  const cityName = document.getElementById('city-name');
+  state.city = city.value;
+  cityName.textContent = state.city;
 };
 
 const registerEventHandlers = () => {
   const tempUp = document.getElementById('temp-up');
   tempUp.addEventListener('click', raiseTemp);
+
   const tempDown = document.getElementById('temp-down');
   tempDown.addEventListener('click', lowerTemp);
+
+  const city = document.getElementById('city');
+  city.addEventListener('input', updateCity);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
