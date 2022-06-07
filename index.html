@@ -1,12 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Report</title>
-</head>
-<body>
-    
-</body>
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Report</title>
+        <link rel="stylesheet" href="styles/index.css">
+    </head>
+    <body>
+        <header>
+            <h1>Weather Report</h1>
+            <h2>🗺 We are in <span id="city-name">Atlanta 🍑</span>! 🗺</h2>
+        </header>
+        <main>
+            <select name="sky" id="sky">
+                <option>Select Sky:</option>
+                <option value="Sunny">Sunny</option>
+                <option value="Cloudy">Cloudy</option>
+                <option value="Rainy">Rainy</option>
+                <option value="Snowy">Snowy</option>
+            </select>
+            <section id="temp-info">
+                <h2 id="temp"></h2>
+                <div id="temp-buttons">
+                    <button id="temp-up">🥵 Up</button>
+                    <button id="temp-down">🥶 Down</button>
+                </div>
+                <button>Get Current Temp</button>
+            </section>
+            <section id="city-info">
+                <input type="text" name="city" id="city" placeholder="change city">
+                <button id="reset-city-button">Reset</button>
+            </section>
+            <img src="assets/hot.jpg" alt="image depicting current temperature." width="500">
+        </main>
+        <script href="./src/index.js"></script>
+        <script src="./node_modules/axios/dist/axios.min.js"></script>
+    </body>
 </html>
