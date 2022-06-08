@@ -66,6 +66,17 @@ const getWeatherFromLocation = async (lat, lon) => {
   updateTemp();
 };
 
+// Wave 6 -- Selecting the Sky
+
+const selectSky = (e) => {
+  const selected = e.target.value;
+  if (!selected) {
+    document.body.style.backgroundImage = `url("/assets/sun.jpg")`;
+  } else {
+    document.body.style.backgroundImage = `url("/assets/${selected}.jpg")`;
+  }
+};
+
 // Event Listeners
 const registerEventHandlers = () => {
   const tempUp = document.getElementById('temp-up');
@@ -79,6 +90,9 @@ const registerEventHandlers = () => {
 
   const getTempButton = document.getElementById('get-temp');
   getTempButton.addEventListener('click', getCurrentTemp);
+
+  const skySelector = document.getElementById('sky');
+  skySelector.addEventListener('change', selectSky);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
