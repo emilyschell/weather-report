@@ -40,9 +40,9 @@ const updateTemp = () => {
 // Wave 3 -- Updating City
 
 const updateCity = () => {
-  const city = document.getElementById('city');
+  const cityInput = document.getElementById('city-input');
   const cityName = document.getElementById('city-name');
-  state.city = city.value;
+  state.city = cityInput.value;
   cityName.textContent = state.city;
 };
 
@@ -66,7 +66,7 @@ const getWeatherFromLocation = async (lat, lon) => {
   updateTemp();
 };
 
-// Wave 6 -- Selecting the Sky
+// Wave 5 -- Selecting the Sky
 
 const selectSky = (e) => {
   const selected = e.target.value;
@@ -77,6 +77,15 @@ const selectSky = (e) => {
   }
 };
 
+// Wave 6 -- Resetting city name
+const resetCity = () => {
+  const cityInput = document.getElementById('city-input');
+  cityInput.value = '';
+  state.city = 'Atlanta 🍑';
+  const cityName = document.getElementById('city-name');
+  cityName.textContent = state.city;
+};
+
 // Event Listeners
 const registerEventHandlers = () => {
   const tempUp = document.getElementById('temp-up');
@@ -85,7 +94,7 @@ const registerEventHandlers = () => {
   const tempDown = document.getElementById('temp-down');
   tempDown.addEventListener('click', lowerTemp);
 
-  const city = document.getElementById('city');
+  const city = document.getElementById('city-input');
   city.addEventListener('input', updateCity);
 
   const getTempButton = document.getElementById('get-temp');
@@ -93,6 +102,9 @@ const registerEventHandlers = () => {
 
   const skySelector = document.getElementById('sky');
   skySelector.addEventListener('change', selectSky);
+
+  const resetButton = document.getElementById('reset-city-button');
+  resetButton.addEventListener('click', resetCity);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
