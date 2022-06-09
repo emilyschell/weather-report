@@ -1,34 +1,63 @@
 const state = {
   city: 'Atlanta 🍑',
   temp: 75,
+  unit: 'F',
 };
+
+const tempDisplay = document.getElementById('temp');
 
 // Wave 2 -- Altering Temperature
 
+const displayTemp = () => {
+  tempDisplay.textContent = `${state.temp}°${state.unit}`;
+};
+
 const raiseTemp = () => {
   state.temp += 1;
-  updateTemp();
+  updateTempDecor();
 };
 
 const lowerTemp = () => {
   state.temp -= 1;
-  updateTemp();
+  updateTempDecor();
 };
 
-const updateTemp = () => {
-  const tempDisplay = document.getElementById('temp');
+const convert = () => {
+  if (state.unit === 'F') {
+    state.temp = Math.floor((state.temp - 32) * (5 / 9));
+    state.unit = 'C';
+  } else if (state.unit === 'C') {
+    state.temp = Math.floor(state.temp * (9 / 5) + 32);
+    state.unit = 'F';
+  }
+  displayTemp();
+};
+
+const updateTempDecor = () => {
+  displayTemp();
   const landscape = document.getElementById('landscape');
-  tempDisplay.textContent = `${state.temp}°`;
-  if (state.temp >= 80) {
+  if (
+    (state.unit === 'F' && state.temp >= 80) ||
+    (state.unit === 'C' && state.temp >= 27)
+  ) {
     tempDisplay.style.color = 'red';
     landscape.setAttribute('src', 'assets/hot.jpg');
-  } else if (state.temp >= 70 && state.temp < 80) {
+  } else if (
+    (state.unit === 'F' && state.temp >= 70 && state.temp < 80) ||
+    (state.unit === 'C' && state.temp >= 21 && state.temp < 27)
+  ) {
     tempDisplay.style.color = 'orange';
     landscape.setAttribute('src', 'assets/warm.jpg');
-  } else if (state.temp >= 60 && state.temp < 70) {
+  } else if (
+    (state.unit === 'F' && state.temp >= 60 && state.temp < 70) ||
+    (state.unit === 'C' && state.temp >= 16 && state.temp < 21)
+  ) {
     tempDisplay.style.color = 'gold';
     landscape.setAttribute('src', 'assets/cool.jpg');
-  } else if (state.temp >= 50 && state.temp < 60) {
+  } else if (
+    (state.unit === 'F' && state.temp >= 50 && state.temp < 60) ||
+    (state.unit === 'C' && state.temp >= 10 && state.temp < 16)
+  ) {
     tempDisplay.style.color = 'green';
     landscape.setAttribute('src', 'assets/cool.jpg');
   } else {
@@ -50,7 +79,7 @@ const updateCity = () => {
 
 const getCurrentTemp = async () => {
   const locationData = await axios.get(
-    `http://127.0.0.1:5000/location?q=${state.city}`
+    `https://emily-weather-proxy-server.herokuapp.com/location?q=${state.city}`
   );
   const lat = locationData.data[0].lat;
   const lon = locationData.data[0].lon;
@@ -59,11 +88,14 @@ const getCurrentTemp = async () => {
 
 const getWeatherFromLocation = async (lat, lon) => {
   const weatherData = await axios.get(
-    `http://127.0.0.1:5000/weather?lat=${lat}&lon=${lon}`
+    `https://emily-weather-proxy-server.herokuapp.com/weather?lat=${lat}&lon=${lon}`
   );
   const tempKelvin = weatherData.data.current.temp;
-  state.temp = Math.floor((tempKelvin - 273.15) * 1.8 + 32);
-  updateTemp();
+  state.temp =
+    state.unit === 'F'
+      ? Math.floor((tempKelvin - 273.15) * 1.8 + 32)
+      : Math.floor(tempKelvin - 273.15);
+  updateTempDecor();
 };
 
 // Wave 5 -- Selecting the Sky
@@ -84,6 +116,7 @@ const resetCity = () => {
   state.city = 'Atlanta 🍑';
   const cityName = document.getElementById('city-name');
   cityName.textContent = state.city;
+  getCurrentTemp();
 };
 
 // Event Listeners
@@ -105,6 +138,9 @@ const registerEventHandlers = () => {
 
   const resetButton = document.getElementById('reset-city-button');
   resetButton.addEventListener('click', resetCity);
+
+  const convertButton = document.getElementById('f-to-c');
+  convertButton.addEventListener('click', convert);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
