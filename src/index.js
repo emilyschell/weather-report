@@ -5,6 +5,8 @@ const state = {
 };
 
 const tempDisplay = document.getElementById('temp');
+const cityInput = document.getElementById('city-input');
+const cityName = document.getElementById('city-name');
 
 // Wave 2 -- Altering Temperature
 
@@ -14,15 +16,17 @@ const displayTemp = () => {
 
 const raiseTemp = () => {
   state.temp += 1;
+  displayTemp();
   updateTempDecor();
 };
 
 const lowerTemp = () => {
   state.temp -= 1;
+  displayTemp();
   updateTempDecor();
 };
 
-const convert = () => {
+const convertTemp = () => {
   if (state.unit === 'F') {
     state.temp = Math.floor((state.temp - 32) * (5 / 9));
     state.unit = 'C';
@@ -34,7 +38,6 @@ const convert = () => {
 };
 
 const updateTempDecor = () => {
-  displayTemp();
   const landscape = document.getElementById('landscape');
   if (
     (state.unit === 'F' && state.temp >= 80) ||
@@ -69,8 +72,6 @@ const updateTempDecor = () => {
 // Wave 3 -- Updating City
 
 const updateCity = () => {
-  const cityInput = document.getElementById('city-input');
-  const cityName = document.getElementById('city-name');
   state.city = cityInput.value;
   cityName.textContent = state.city;
 };
@@ -95,6 +96,7 @@ const getWeatherFromLocation = async (lat, lon) => {
     state.unit === 'F'
       ? Math.floor((tempKelvin - 273.15) * 1.8 + 32)
       : Math.floor(tempKelvin - 273.15);
+  displayTemp();
   updateTempDecor();
 };
 
@@ -111,10 +113,8 @@ const selectSky = (e) => {
 
 // Wave 6 -- Resetting city name
 const resetCity = () => {
-  const cityInput = document.getElementById('city-input');
   cityInput.value = '';
   state.city = 'Atlanta 🍑';
-  const cityName = document.getElementById('city-name');
   cityName.textContent = state.city;
   getCurrentTemp();
 };
@@ -127,8 +127,7 @@ const registerEventHandlers = () => {
   const tempDown = document.getElementById('temp-down');
   tempDown.addEventListener('click', lowerTemp);
 
-  const city = document.getElementById('city-input');
-  city.addEventListener('input', updateCity);
+  cityInput.addEventListener('input', updateCity);
 
   const getTempButton = document.getElementById('get-temp');
   getTempButton.addEventListener('click', getCurrentTemp);
@@ -140,7 +139,7 @@ const registerEventHandlers = () => {
   resetButton.addEventListener('click', resetCity);
 
   const convertButton = document.getElementById('f-to-c');
-  convertButton.addEventListener('click', convert);
+  convertButton.addEventListener('click', convertTemp);
 };
 
 document.addEventListener('DOMContentLoaded', registerEventHandlers);
