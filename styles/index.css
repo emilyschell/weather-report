@@ -4,7 +4,7 @@ html {
 
 body {
   align-items: center;
-  background-image: url("/assets/sun.jpg");
+  background-image: url("../assets/sun.jpg");
   background-size: cover;
   display: flex;
   flex-direction: column;
