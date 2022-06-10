@@ -44,28 +44,28 @@ const updateTempDecor = () => {
     (state.unit === 'C' && state.temp >= 27)
   ) {
     tempDisplay.className = 'red';
-    landscape.setAttribute('src', 'assets/hot.jpg');
+    landscape.className = 'hot';
   } else if (
     (state.unit === 'F' && state.temp >= 70 && state.temp < 80) ||
     (state.unit === 'C' && state.temp >= 21 && state.temp < 27)
   ) {
     tempDisplay.className = 'orange';
-    landscape.setAttribute('src', 'assets/warm.jpg');
+    landscape.className = 'warm';
   } else if (
     (state.unit === 'F' && state.temp >= 60 && state.temp < 70) ||
     (state.unit === 'C' && state.temp >= 16 && state.temp < 21)
   ) {
     tempDisplay.className = 'gold';
-    landscape.setAttribute('src', 'assets/cool.jpg');
+    landscape.className = 'cool';
   } else if (
     (state.unit === 'F' && state.temp >= 50 && state.temp < 60) ||
     (state.unit === 'C' && state.temp >= 10 && state.temp < 16)
   ) {
     tempDisplay.className = 'green';
-    landscape.setAttribute('src', 'assets/cool.jpg');
+    landscape.className = 'cool';
   } else {
     tempDisplay.className = 'lightblue';
-    landscape.setAttribute('src', 'assets/cold.jpg');
+    landscape.className = 'cold';
   }
 };
 
