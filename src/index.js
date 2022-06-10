@@ -105,9 +105,9 @@ const getWeatherFromLocation = async (lat, lon) => {
 const selectSky = (e) => {
   const selected = e.target.value;
   if (!selected) {
-    document.body.style.backgroundImage = `url("assets/sun.jpg")`;
+    document.body.className = 'sun';
   } else {
-    document.body.style.backgroundImage = `url("assets/${selected}.jpg")`;
+    document.body.className = selected;
   }
 };
 

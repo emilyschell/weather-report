@@ -4,12 +4,27 @@ html {
 
 body {
   align-items: center;
-  background-image: url("../assets/sun.jpg");
   background-size: cover;
   display: flex;
   flex-direction: column;
   margin: 0;
   text-align: center;
+}
+
+.sun {
+  background-image: url("../assets/sun.jpg");
+}
+
+.cloud {
+  background-image: url("../assets/cloud.jpg");
+}
+
+.rain {
+  background-image: url("../assets/rain.jpg");
+}
+
+.snow {
+  background-image: url("../assets/snow.jpg");
 }
 
 header {
