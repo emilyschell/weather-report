@@ -44,9 +44,28 @@ select {
   background-color: #fff;
   border: 1.5px solid #000;
   border-radius: 5px;
-  color: #ffa500;
   font-size: 3rem;
   padding: .5rem;
+}
+
+.red {
+  color: red;
+}
+
+.orange {
+  color: orange;
+}
+
+.gold {
+  color: gold;
+}
+
+.green {
+  color: green;
+}
+
+.lightblue {
+  color: lightblue;
 }
 
 #temp-buttons {
